@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- jQuery 연결 -->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <meta charset="UTF-8">
+    <link href="../static/css/check.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+
+</style>
+
+<body>
+    <div id="container">
+        <!--고정 상단바-->
+        <div class="head-bar">
+            <img id="icon1" src="../static/img/list.png" alt="">
+            <img id="logo" src="../static/img/로고화이트.png" alt="">
+            <img id="icon2" src="../static/img/bell.png" alt="">
+        </div>
+
+        <!-- 중앙 내용 -->
+        <div class="middle">
+            {% if not inv_list %}
+            <div class="no">
+                <span id="nocheck">받은 초대장이 없습니다</span>
+            </div>
+            {% else %}
+            <!--초대장 목록-->
+            <div class="list">
+                <div class="scroll">
+                    {% for inv in inv_list %}
+                    <div class="card">
+                        <h1 id="title">초대합니다</h1>
+                        <div class="info">
+                            <img id="simg" src="../static/img/계정이미지.jpg" alt="">
+                            <p id="content">{{inv.send}}님이 초대하신<br>'{{inv.title}}'</p>
+                        </div>
+                        <hr class="line">
+                        <div class="button">
+                            <a href='{% url "yes" inv.id %}'><button id="accept"><span
+                                        style="font-size: 18px; font-weight:bold; color:black;">수락</span></button></a>
+                            <a href='{% url "no" %}'><button id="reject"><span
+                                        style="font-size: 18px; font-weight:bold; color:black;">거절</span></button></a>
+                        </div>
+                    </div>
+                    
+                    {% endfor %}
+                </div>
+               {% endif %}
+            </div>
+
+            <!-- 하단 고정바 -->
+            <div class="foot-bar">
+                <a href="{% url 'home' %}"><img id="foot-home" src="../static/img/home.png" alt=""></a>
+                <a href="{% url 'check' %}"><img id="foot-invite" src="../static/img/invite.png" alt=""></a>
+                <a href="{% url 'map' %}"><img id="foot-bell" src="../static/img/bell.png" alt=""></a>
+                <a href="{% url 'myportfolio' us_id %}"><img id="foot-user" src="../static/img/user.png" alt=""></a>
+            </div>
+        </div>
+
+</body>
+
+</html>
